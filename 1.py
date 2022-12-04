@@ -59,36 +59,34 @@ class Shape:
 
 class Triangle(Shape):
     def __init__(self, a: Point, b: Point, c: Point):
-        # kiem tra hinh chu nhat co hop le hay chua
-        # neu chua thi phai in ra canh bao cho nguoi dung
-        # va yeu cau ho nhap lai
+        if a.distance(b) + a.distance(c) <= b.distance(c) or a.distance(b) + b.distance(c) <= a.distance(c) or a.distance(c) + b.distance(c) <= a.distance(b):
+            raise ValueError("Khong phai tam giac")
         self.__a = a
         self.__b = b
         self.__c = c
 
     def area(self) -> float:
-        ...
+        p = self.perimeter() / 2
+        return math.sqrt(p * (p - self.__a.distance(self.__b)) * (p - self.__a.distance(self.__c)) * (p - self.__b.distance(self.__c)))
 
     def perimeter(self) -> float:
-        ...
+        return self.__a.distance(self.__b) + self.__a.distance(self.__c) + self.__b.distance(self.__c)
 
 
 class Rectangle(Shape):
     def __init__(self, a, b, c, d):
+        if a.distance(b) != c.distance(d) or a.distance(d) != b.distance(c):
+            raise ValueError("Khong phai hinh chu nhat")
         self.__a = a
         self.__b = b
         self.__c = c
         self.__d = d
 
-    # kiem tra hinh chu nhat co hop le hay chua
-    # neu chua thi phai in ra canh bao cho nguoi dung
-    # va yeu cau ho nhap lai
-
     def area(self) -> float:
-        ...
+        return self.__a.distance(self.__b) * self.__a.distance(self.__d)
 
     def perimeter(self) -> float:
-        ...
+        return 2 * (self.__a.distance(self.__b) + self.__a.distance(self.__d))
 
 
 if __name__ == '__main__':
