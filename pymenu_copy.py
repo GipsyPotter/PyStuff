@@ -1,4 +1,3 @@
-
 import os
 from pynput import keyboard
 from pynput.keyboard import Key
@@ -66,5 +65,5 @@ if __name__ == '__main__':
             break
         clear()
         export_menu(opt, cur)
-        with keyboard.Listener(on_release = on_key_release) as listener:
+        with keyboard.Listener(on_release=on_key_release) as listener:
             listener.join()
